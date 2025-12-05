@@ -5,12 +5,22 @@ import gladia_utils as gut
 import references as ref
 import evaluation_utils as eu
 
+reftxtfile = st.file_uploader("Choose a reference text file", type=['txt'])
+if reftxtfile is not None:
+    # Read file as text
+    text = reftxtfile.read().decode("utf-8")
+
+    wrapped_text = f'"""\n{text}\n"""'
+# REFERENCE_MAPPER = {
+#     "SWO": ref.SWO,
+#     "BLO": ref.BLO,
+#     "BOOK": None
+# }
 REFERENCE_MAPPER = {
-    "SWO": ref.SWO,
+    "SWO": wrapped_text,
     "BLO": ref.BLO,
     "BOOK": None
 }
-
 
 # add the title and emojis
 st.title("🎯 Pronunciation Test")
