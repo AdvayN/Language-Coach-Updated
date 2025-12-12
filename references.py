@@ -1,4 +1,4 @@
-Level_5 = (
+Level_5 = {
 "BLO" : (
     """
     this
@@ -38,4 +38,4 @@ Level_5 = (
     they like to play
     """
 )
-)
+}
