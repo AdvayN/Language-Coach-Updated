@@ -4,23 +4,46 @@ from Utils import save_audio_wav
 import gladia_utils as gut
 import references as ref
 import evaluation_utils as eu
+option = st.selectbox("Select An Option", ["Upload a txt file","Choose a file"])
+if option == "Upload a txt file":
+    reftxtfile = st.file_uploader("Choose a reference text file", type=['txt'])
+    if reftxtfile is not None:
+     # Read file as text
+        text = reftxtfile.read().decode("utf-8")
+        reference = f'"""\n{text}\n"""'
+    else:
+        st.warning("Please Upload a txt file")
+        st.stop()
+elif option== "Choose a file":
+    # column for selecting test level and test type
+    col_one, col_two = st.columns(2)
 
-reftxtfile = st.file_uploader("Choose a reference text file", type=['txt'])
-if reftxtfile is not None:
-    # Read file as text
-    text = reftxtfile.read().decode("utf-8")
+    with col_one:
+        test_level = st.selectbox("Select Test Level", ["Level 5"])
 
-    wrapped_text = f'"""\n{text}\n"""'
+    with col_two:
+        test_type = st.selectbox("Select Test Type", ["SWO", "BLO", "BOOK"])
+
+    # decide the reference type
+    if test_level=="Level 5":
+        reference = ref.Level_5[test_type]
+    else:
+        None
+    # if not reference:
+    #     st.error("Invalid reference type selected!", icon = "🚨")
+    #     st.stop()
+    
 # REFERENCE_MAPPER = {
 #     "SWO": ref.SWO,
 #     "BLO": ref.BLO,
 #     "BOOK": None
 # }
-REFERENCE_MAPPER = {
-    "SWO": wrapped_text,
-    "BLO": ref.BLO,
-    "BOOK": None
-}
+
+# REFERENCE_MAPPER = {
+#     "SWO": wrapped_text,
+#     "BLO": ref.Level_5["BLO"],
+#     "BOOK": None
+# }
 
 # add the title and emojis
 st.title("🎯 Pronunciation Test")
@@ -28,20 +51,6 @@ st.title("🎯 Pronunciation Test")
 # upload an audio file
 uploaded_file = st.file_uploader("Choose an audio file", type=['wav', 'mp3', 'ogg'])
 
-# column for selecting test level and test type
-col_one, col_two = st.columns(2)
-
-with col_one:
-    test_level = st.selectbox("Select Test Level", ["Level 5"])
-
-with col_two:
-    test_type = st.selectbox("Select Test Type", ["SWO", "BLO", "BOOK"])
-
-# decide the reference type
-reference = REFERENCE_MAPPER.get(test_type, None)
-if not reference:
-    st.error("Invalid reference type selected!", icon = "🚨")
-    st.stop()
 
 if uploaded_file is not None:
     st.write(f"Uploaded file: {uploaded_file.name}")

@@ -1,4 +1,5 @@
-BLO = (
+Level_5 = (
+"BLO" : (
     """
     this
     this is a book
@@ -19,10 +20,9 @@ BLO = (
     says
     she says hi
     """
-)
+),
 
-
-SWO = (
+"SWO" : (
     """
     they
     they
@@ -37,4 +37,5 @@ SWO = (
     play
     they like to play
     """
+)
 )
