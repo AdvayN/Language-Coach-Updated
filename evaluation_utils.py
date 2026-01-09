@@ -6,7 +6,7 @@ from typing import List, Tuple, Optional, Dict
 from dataclasses import dataclass
 
 
-LOW_CONF = 0.35  
+LOW_CONF = 0.30  
 VERY_LOW_CONF = 0.20
 CSV_NAME = "evaluation.csv"
 FILLERS = set("""

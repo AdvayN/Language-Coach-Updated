@@ -53,7 +53,7 @@ if audio_option == "Upload an audio file":
     uploaded_file = st.file_uploader("Upload an audio file", type=['wav', 'mp3', 'ogg'])
 elif audio_option == "Record Audio":
     uploaded_file = st.audio_input("Record your audio")
-    
+
 if uploaded_file is not None:
     st.write(f"Uploaded file: {uploaded_file.name}")
 
@@ -83,6 +83,7 @@ if uploaded_file is not None:
         # get the transcription
         transcript_response = gut.poll_transcription(audio_id)
         audio_transcript = transcript_response.get("transcript", None)
+        st.success(audio_transcript)
         audio_status = transcript_response.get("status", None)
         if not audio_transcript:
             # error with an emoji
