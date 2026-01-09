@@ -47,11 +47,13 @@ elif option== "Choose a file":
 
 # add the title and emojis
 st.title("🎯 Pronunciation Test")
-
-# upload an audio file
-uploaded_file = st.file_uploader("Choose an audio file", type=['wav', 'mp3', 'ogg'])
-
-
+audio_option = st.selectbox("Select An Option", ["Upload an audio file","Record Audio"])
+if audio_option == "Upload an audio file":
+    # upload an audio file
+    uploaded_file = st.file_uploader("Upload an audio file", type=['wav', 'mp3', 'ogg'])
+elif audio_option == "Record Audio":
+    uploaded_file = st.audio_input("Record your audio")
+    
 if uploaded_file is not None:
     st.write(f"Uploaded file: {uploaded_file.name}")
 
