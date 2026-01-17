@@ -96,8 +96,8 @@ if uploaded_file is not None:
         # display the evaluation more attractively
         # header with emoji
         st.subheader("🎯 Evaluation Results")
-        st.success(evaluation)
-        st.dataframe(evaluation, width="stretch")
+        #st.success(evaluation)
+        #st.dataframe(evaluation, width="stretch")
     st.success("Evaluation Completed")
     # download button to download the evaluation csv
     st.download_button(
