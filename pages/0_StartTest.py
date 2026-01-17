@@ -83,7 +83,7 @@ if uploaded_file is not None:
         # get the transcription
         transcript_response = gut.poll_transcription(audio_id)
         audio_transcript = transcript_response.get("transcript", None)
-        st.success(audio_transcript)
+        #st.success(audio_transcript)
         audio_status = transcript_response.get("status", None)
         if not audio_transcript:
             # error with an emoji
@@ -96,7 +96,7 @@ if uploaded_file is not None:
         # display the evaluation more attractively
         # header with emoji
         st.subheader("🎯 Evaluation Results")
-        st.success(evaluation)
+        #st.success(evaluation)
         st.dataframe(evaluation, width="stretch")
     st.success("Evaluation Completed")
     # download button to download the evaluation csv
