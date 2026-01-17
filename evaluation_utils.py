@@ -121,9 +121,8 @@ def evaluate_pronounciations(utterances: List[dict], reference: str) -> pd.DataF
     for op, ref_tok, hyp in alignment:
         label = classify_alignment(op, ref_tok, hyp)
 
-        # Always add a row, including "match"
         rows.append({
-            "type": label,   # "match", "mispronounced", "missed", "extra", etc.
+            "type": label,
             "reference_word": ref_tok or "",
             "heard_word": "" if hyp is None else hyp.text,
             "start_sec": None if hyp is None else (
@@ -135,7 +134,7 @@ def evaluate_pronounciations(utterances: List[dict], reference: str) -> pd.DataF
             "confidence": None if (hyp is None or hyp.prob is None)
             else round(hyp.prob, 3),
         })
-        
+
     df = pd.DataFrame(
         rows,
         columns=["type", "reference_word", "heard_word", "start_sec", "end_sec", "confidence"]
