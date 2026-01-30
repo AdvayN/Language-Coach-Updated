@@ -4,6 +4,7 @@ from Utils import save_audio_wav
 import gladia_utils as gut
 import references as ref
 import evaluation_utils as eu
+import os
 option = st.selectbox("Select An Option", ["Upload a txt file","Choose a file"])
 if option == "Upload a txt file":
     reftxtfile = st.file_uploader("Choose a reference text file", type=['txt'])
@@ -16,19 +17,29 @@ if option == "Upload a txt file":
         st.stop()
 elif option== "Choose a file":
     # column for selecting test level and test type
-    col_one, col_two = st.columns(2)
+    col_one, col_two, col_three = st.columns(3)
 
     with col_one:
-        test_level = st.selectbox("Select Test Level", ["Level 5"])
+        test_level = st.selectbox("Select Test Level", ["Level 0","Level 1","Level 2","Level 3"])
 
     with col_two:
-        test_type = st.selectbox("Select Test Type", ["SWO", "BLO", "BOOK"])
+        root_dir = os.path.join("text files",test_level)
+        folders = [ item for item in os.listdir(root_dir) if os.path.isdir(os.path.join(root_dir, item)) ]
+        test_type = st.selectbox("Select Test Type", folders)
+    
+    with col_three:
+        root_dir1 = os.path.join(root_dir,test_type)
+        files = [ item for item in os.listdir(root_dir1) if os.path.isfile(os.path.join(root_dir1, item)) ]
+        Test = st.selectbox("Select Test", files)
+        file_path = os.path.join(root_dir1,Test)
+        text = file_path.read().decode("utf-8")
+        reference = f'"""\n{text}\n"""'
 
-    # decide the reference type
-    if test_level=="Level 5":
-        reference = ref.Level_5[test_type]
-    else:
-        None
+    # # decide the reference type
+    # if test_level=="Level 5":
+    #     reference = ref.Level_5[test_type]
+    # else:
+    #     None
     # if not reference:
     #     st.error("Invalid reference type selected!", icon = "🚨")
     #     st.stop()
