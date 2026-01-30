@@ -32,7 +32,9 @@ elif option== "Choose a file":
         files = [ item for item in os.listdir(root_dir1) if os.path.isfile(os.path.join(root_dir1, item)) ]
         Test = st.selectbox("Select Test", files)
         file_path = os.path.join(root_dir1,Test)
-        text = file_path.read().decode("utf-8")
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf-8") as f:
+                text = f.read()
         reference = f'"""\n{text}\n"""'
 
     # # decide the reference type
