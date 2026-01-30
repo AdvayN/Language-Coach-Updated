@@ -29,7 +29,7 @@ elif option== "Choose a file":
     
     with col_three:
         root_dir1 = os.path.join(root_dir,test_type)
-        files = [ item for item in os.listdir(root_dir1) if os.path.isfile(os.path.join(root_dir1, item)) ].sort()
+        files = [ item for item in os.listdir(root_dir1) if os.path.isfile(os.path.join(root_dir1, item)) ]
         Test = st.selectbox("Select Test", files)
         file_path = os.path.join(root_dir1,Test)
         if os.path.exists(file_path):
