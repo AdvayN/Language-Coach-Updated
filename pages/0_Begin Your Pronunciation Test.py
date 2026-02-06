@@ -5,13 +5,36 @@ import gladia_utils as gut
 import references as ref
 import evaluation_utils as eu
 import os
+def extract_text_streamlit(uploaded_file):
+    """Extracts text using PyMuPDF from a Streamlit UploadedFile object."""
+    try:
+        text_content = []
+
+        # Read the bytes from the uploaded file
+        file_bytes = uploaded_file.read()
+
+        # Open the document from memory (stream)
+        # 'stream' contains the bytes, 'filetype' tells fitz it's a pdf
+        with fitz.open(stream=file_bytes, filetype="pdf") as doc:
+            for page in doc:
+                text_content.append(page.get_text())
+
+        full_text = "\n".join(text_content)
+
+        # Filter out empty/scanned books (less than 50 chars of text)
+        if len(full_text.strip()) < 50:
+            return None
+
+        return full_text
+    except Exception as e:
+        return f"ERROR: {e}"
 option = st.selectbox("Select An Option", ["Upload a txt file","Choose a file"])
 if option == "Upload a txt file":
     reftxtfile = st.file_uploader("Choose a reference text file", type=['txt','pdf'])
     if reftxtfile is not None:
      # Read file as text
         if reftxtfile.type == 'application/pdf':
-            text = extract_text_local(reftxtfile)
+            text = extract_text_streamlit(reftxtfile)
         else:
             text = reftxtfile.read().decode("utf-8")
         reference = f'"""\n{text}\n"""'
@@ -128,26 +151,3 @@ if uploaded_file is not None:
 
 
 
-def extract_text_streamlit(uploaded_file):
-    """Extracts text using PyMuPDF from a Streamlit UploadedFile object."""
-    try:
-        text_content = []
-
-        # Read the bytes from the uploaded file
-        file_bytes = uploaded_file.read()
-
-        # Open the document from memory (stream)
-        # 'stream' contains the bytes, 'filetype' tells fitz it's a pdf
-        with fitz.open(stream=file_bytes, filetype="pdf") as doc:
-            for page in doc:
-                text_content.append(page.get_text())
-
-        full_text = "\n".join(text_content)
-
-        # Filter out empty/scanned books (less than 50 chars of text)
-        if len(full_text.strip()) < 50:
-            return None
-
-        return full_text
-    except Exception as e:
-        return f"ERROR: {e}"
