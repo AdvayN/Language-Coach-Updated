@@ -10,7 +10,7 @@ if option == "Upload a txt file":
     reftxtfile = st.file_uploader("Choose a reference text file", type=['txt','pdf'])
     if reftxtfile is not None:
      # Read file as text
-        if reftxtfile.type == 'pdf':
+        if reftxtfile.type == 'application/pdf':
             text = extract_text_local(reftxtfile)
         else:
             text = reftxtfile.read().decode("utf-8")
