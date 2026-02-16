@@ -65,6 +65,7 @@ with col4:
 with col5:
     st.markdown("""
     #### 📊 Step 3: Review
+
     - Review detailed feedback
     - Practice problem areas
     """)
@@ -77,8 +78,14 @@ st.success("👈 **Ready to begin?** Go to Start Test page from the sidebar to s
 # st.markdown("---")
 # st.markdown("### 💡 Why Pronunciation Matters")
 # st.markdown("""
+# Clear pronunciation is essential for effective communication. Whether you're:
+# - **Learning a new language** - Build confidence in speaking
+# - **Preparing for interviews** - Make a strong first impression
+# - **Improving accent** - Enhance clarity and understanding
+# - **Professional development** - Communicate more effectively at work
 
-""")
+# Master Your Pronunciation helps you achieve your pronunciation goals with precision and ease.
+# """)
 
 # Footer
 st.markdown("---")
