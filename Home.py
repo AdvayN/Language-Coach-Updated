@@ -21,14 +21,13 @@ with col1:
     ### Welcome to Master Your Pronunciation! 👋
     
     Perfect your pronunciation with our advanced audio-based testing system. 
-    Whether you're learning a new language or refining your accent, Master Your Pronunciation provides 
-    instant, accurate feedback to help you speak with confidence.
+
     
     #### 🎤 How It Works
     
     1. **Choose Your Test** - Select from various pronunciation exercises
     2. **Upload Your Audio** - Speak clearly into your microphone
-    3. **Get Instant Feedback** - Receive detailed analysis and improvement tips
+    3. **Get Instant Feedback** - Receive detailed analysis
     """)
 
 with col2:
@@ -66,7 +65,6 @@ with col4:
 with col5:
     st.markdown("""
     #### 📊 Step 3: Review
-    - Check your pronunciation score
     - Review detailed feedback
     - Practice problem areas
     """)
@@ -76,16 +74,10 @@ st.markdown("---")
 st.success("👈 **Ready to begin?** Go to Start Test page from the sidebar to start improving your pronunciation!")
 
 # Additional information
-st.markdown("---")
-st.markdown("### 💡 Why Pronunciation Matters")
-st.markdown("""
-Clear pronunciation is essential for effective communication. Whether you're:
-- **Learning a new language** - Build confidence in speaking
-- **Preparing for interviews** - Make a strong first impression
-- **Improving accent** - Enhance clarity and understanding
-- **Professional development** - Communicate more effectively at work
+# st.markdown("---")
+# st.markdown("### 💡 Why Pronunciation Matters")
+# st.markdown("""
 
-Master Your Pronunciation helps you achieve your pronunciation goals with precision and ease.
 """)
 
 # Footer
